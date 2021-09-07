@@ -5,7 +5,9 @@ import os
 import requests
 
 TOKEN = os.environ["DISCORD_AUTH"]
+menu = DefaultMenu(page_left="◀️", page_right="▶️", remove="❌")
 bot = commands.Bot(command_prefix="sb.", intents=discord.Intents.all())
+bot.help_command = PrettyHelp(menu=menu)
 
 
 # When the bot is turned on, print out bot has connected
@@ -19,7 +21,7 @@ async def on_ready():
 @tasks.loop(seconds=120)
 async def check_server():
     # Define the channel to send updates in
-    channel = bot.get_channel(826939307390402623)
+    channel = bot.get_channel(884899768617300008)
     # Get the data
     r = requests.get("https://soulbound.llaamaguy.repl.co/data")
     # Parse and send the data to the defined channel
@@ -27,7 +29,7 @@ async def check_server():
     data = data["response"]
     for k, v in data.items():
         k = k.split()
-        await channel.send(k[0] + ": " + str(v))
+        await channel.send(k[0] + " just got the " + str(v) + " badge")
 
 
 bot.run(TOKEN)

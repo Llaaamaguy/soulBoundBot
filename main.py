@@ -17,8 +17,8 @@ async def on_ready():
     check_server.start()
 
 
-# Every 2.5 minutes, check the web server for new badge earns
-@tasks.loop(seconds=120)
+# Every 2 minutes, check the web server for new badge earns
+@tasks.loop(minutes=2)
 async def check_server():
     # Define the channel to send updates in
     channel = bot.get_channel(884899768617300008)

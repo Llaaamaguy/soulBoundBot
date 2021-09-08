@@ -25,11 +25,12 @@ async def check_server():
     # Get the data
     r = requests.get("https://soulbound.llaamaguy.repl.co/data")
     # Parse and send the data to the defined channel
-    data = r.json()
-    data = data["response"]
-    for k, v in data.items():
-        k = k.split()
-        await channel.send(k[0] + " just got the " + str(v) + " badge")
+    data = r.json()['response']
+
+    print(data)
+
+    for player in data:
+        await channel.send(str(player['username']) + " just got the " + str(player['badge']) + " badge")
 
 
 bot.run(TOKEN)
